@@ -1,0 +1,209 @@
+[1mtrue.[0m
+
+?- ['N:/GitHub/ECE-3520/Software Development Experience 1/SDE1_flower_ajbrune.pl'].
+
+
+[1mtrue.[0m
+
+?- bedplan(F1,F2,F3,F4).
+
+
+Stage 1 Bedplan:
+F1 = daisies,
+F2 = petunias,
+F3 = chrysanthemum,
+F4 = zinnia.
+
+?- ['N:/GitHub/ECE-3520/Software Development Experience 1/SDE1_flower_ajbrune.pl'].
+
+
+[1mtrue.[0m
+
+?- bedplan(F1,F2,F3,F4).
+
+
+Stage 2 Bedplan(s):
+yellow red yellow red 
+F1 = F3, F3 = daisies,
+F2 = F4, F4 = roses ;[1m;[0m
+yellow red yellow pink 
+F1 = F3, F3 = daisies,
+F2 = roses,
+F4 = petunias ;[1m;[0m
+yellow red yellow white 
+F1 = F3, F3 = daisies,
+F2 = roses,
+F4 = begonias ;[1m;[0m
+yellow red yellow red 
+F1 = F3, F3 = daisies,
+F2 = roses,
+F4 = snapdragons ;[1m;[0m
+yellow red yellow red 
+F1 = F3, F3 = daisies,
+F2 = roses,
+F4 = gardenias .[1m.[0m
+
+?- ['N:/GitHub/ECE-3520/Software Development Experience 1/SDE1_flower_ajbrune.pl'].
+
+
+[1mtrue.[0m
+
+?- bedplan(F1,F2,F3,F4).
+
+
+Stage 3 Bedplan(s):
+dry wet wet dry 
+F1 = F4, F4 = roses,
+F2 = daisies,
+F3 = petunias ;[1m;[0m
+dry wet wet dry 
+F1 = roses,
+F2 = daisies,
+F3 = petunias,
+F4 = snapdragons ;[1m;[0m
+dry wet wet dry 
+F1 = roses,
+F2 = daisies,
+F3 = petunias,
+F4 = lilies ;[1m;[0m
+dry wet wet dry 
+F1 = roses,
+F2 = daisies,
+F3 = petunias,
+F4 = buttercup ;[1m;[0m
+dry wet wet dry 
+F1 = roses,
+F2 = daisies,
+F3 = petunias,
+F4 = poppy .[1m.[0m
+
+?- ['N:/GitHub/ECE-3520/Software Development Experience 1/SDE1_flower_ajbrune.pl'].
+
+
+[1mtrue.[0m
+
+?- bedplan(F1,F2,F3,F4).
+
+
+Stage 4 Bedplan(s):
+med  tall med tall 
+F1 = roses,
+F2 = begonias,
+F3 = daisies,
+F4 = snapdragons ;[1m;[0m
+med  tall med short 
+F1 = roses,
+F2 = begonias,
+F3 = daisies,
+F4 = lilies ;[1m;[0m
+med  tall med tall 
+F1 = roses,
+F2 = begonias,
+F3 = petunias,
+F4 = snapdragons ;[1m;[0m
+med  tall med short 
+F1 = roses,
+F2 = begonias,
+F3 = petunias,
+F4 = buttercup ;[1m;[0m
+med  tall med short 
+F1 = roses,
+F2 = begonias,
+F3 = petunias,
+F4 = geranium ;[1m;[0m
+med  tall med short 
+F1 = roses,
+F2 = begonias,
+F3 = petunias,
+F4 = lavender ;[1m;[0m
+med  tall med tall 
+F1 = roses,
+F2 = begonias,
+F3 = petunias,
+F4 = sunflower .[1m.[0m
+
+?- ['N:/GitHub/ECE-3520/Software Development Experience 1/SDE1_flower_ajbrune.pl'].
+
+
+[1mtrue.[0m
+
+?- bedplan(F1,F2,F3,F4,F5,F6).
+
+
+Stage 5 Bedplan(s):
+med   dry red 
+tall  wet white 
+med   wet yellow 
+tall  dry red 
+med   wet pink 
+short dry white 
+F1 = roses,
+F2 = begonias,
+F3 = daisies,
+F4 = snapdragons,
+F5 = petunias,
+F6 = lilies ;[1m;[0m
+med   dry red 
+tall  wet white 
+med   wet yellow 
+tall  dry red 
+med   wet pink 
+short dry yellow 
+F1 = roses,
+F2 = begonias,
+F3 = daisies,
+F4 = snapdragons,
+F5 = petunias,
+F6 = buttercup ;[1m;[0m
+med   dry red 
+tall  wet white 
+med   wet yellow 
+tall  dry red 
+med   wet pink 
+short dry red 
+F1 = roses,
+F2 = begonias,
+F3 = daisies,
+F4 = snapdragons,
+F5 = petunias,
+F6 = geranium ;[1m;[0m
+med   dry red 
+tall  wet white 
+med   wet yellow 
+tall  dry red 
+med   wet pink 
+short dry purple 
+F1 = roses,
+F2 = begonias,
+F3 = daisies,
+F4 = snapdragons,
+F5 = petunias,
+F6 = lavender ;[1m;[0m
+med   dry red 
+tall  wet white 
+med   wet yellow 
+tall  dry red 
+med   wet pink 
+tall  dry purple 
+F1 = roses,
+F2 = begonias,
+F3 = daisies,
+F4 = snapdragons,
+F5 = petunias,
+F6 = iris ;[1m;[0m
+med   dry red 
+tall  wet white 
+med   wet yellow 
+tall  dry red 
+med   wet pink 
+tall  dry yellow 
+F1 = roses,
+F2 = begonias,
+F3 = daisies,
+F4 = snapdragons,
+F5 = petunias,
+F6 = sunflower .[1m.[0m
+
+?- noprotocol.
+
+
