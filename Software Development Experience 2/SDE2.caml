@@ -13,7 +13,7 @@
         # first_duplicate [1;2;3;4;5;6;7;8;9;10];; 
         : int = -10000 *)
 
-
+(* SOLUTION GOES HERE *)
 
 (* Problem 2: First Non-Repeating Element in a List
     Prototype: 
