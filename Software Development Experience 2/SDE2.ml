@@ -1,0 +1,154 @@
+(* Problem 1: First Duplicate in a List
+    Prototype: 
+        first_duplicate of a list returns -10000 if there are no duplicates 
+        in the integer list argument. Otherwise the first item that occurs 
+        more than once (duplicate) in the integer list is returned.
+    Signature: 
+        val first_duplicate: int list -> int = <fun>
+    Sample Use:
+        # first_duplicate [1;2;3;4;5;6;7;4;5;8;9];; 
+        : int = 4 
+        # first_duplicate [1;2;3;4;5;6;7;4;5;2;9];; 
+        : int = 2 
+        # first_duplicate [1;2;3;4;5;6;7;8;9;10];; 
+        : int = -10000 *)
+
+let rec first_duplicate = function inputList ->
+(* List.mem is only true if List.hd exists in List.tl
+   List.hd - Head Element 
+   List.tl - List without first element
+*)
+  if List.mem (List.hd inputList) (List.tl inputList) == true then List.hd inputList
+    else
+      if   List.tl inputList == [] then -10000 (* Did not find duplicate *)
+      else first_duplicate (List.tl inputList);; (* Recursion, look at list without head *)
+
+(* Problem 2: First Non-Repeating Element in a List
+    Prototype: 
+        first_nonrepeating of a list returns -10000 if there are 
+        no non-repeated (non-duplicated) element in the list. Otherwise it 
+        returns the first non-repeating element in the integer list.
+    Signature: 
+        val first_nonrepeating : int list -> int = <fun>
+    Sample Use:
+        # first_nonrepeating [1;2;3;2;7;5;6;1;3];; 
+        : int = 7 
+        # first_nonrepeating [1;2;9;3;2;7;5;6;1;3];; 
+        : int = 9 
+        # first_nonrepeating [1;2;9;3;2;7;5;6;10;30];; 
+        : int = 1 
+        # first_nonrepeating [1;2;9;3;2;7;5;6;1;10;30];; 
+        : int = 9 
+        # first_nonrepeating [1;2;9;3;2;7;5;9;6;1;10;30];; 
+        : int = 3 
+        # first_nonrepeating [1;2;3;2;7;5;6;1;3];; 
+        : int = 7 
+        # first_nonrepeating [1;2;3;4;5;1;2;3;4;5];; 
+        : int = -10000 
+        # first_nonrepeating [1;2;3;4;5;1;2;3;4;9];; 
+        : int = 5 
+        # first_nonrepeating [1;1;1;2;2;2];; 
+        : int = -10000 *)
+
+let rec reduceInput inputList tmpList =
+  match inputList with
+  | []         -> -10000 (* Base Case: Empty input *)
+  | hd::tl -> if (List.mem hd tl) == false then (* Head exists in tail *)
+                    if (List.mem hd tmpList) == false then hd
+                      else reduceInput tl (tmpList @ [hd])
+                  else reduceInput tl (tmpList @ [hd]);;
+
+let rec first_nonrepeating inputList = 
+  match inputList with
+  | []         -> -10000
+  | hd::tl -> if (List.mem hd tl) == false then hd
+                  else reduceInput inputList [];;
+
+(* Problem Three: The Sum of 2 Problem
+    Prototype: 
+        sumOfTwo(a,b,v) returns false if there does not exist 
+        and integer in a, which added to any integer in b, equals v.  If 
+        there is an integer in a, and an integer in b that sum to v, return 
+        true.
+    Signature: 
+        val sumOfTwo : int list * int list * int -> bool = <fun>
+    Sample Use:
+        # sumOfTwo([1;2;3],[10;20;30;40],42);; 
+        : bool = true 
+        # sumOfTwo([1;2;3],[10;20;30;40],40);; 
+        : bool = false 
+        # sumOfTwo([1;2;3],[10;20;30;40],41);; 
+        : bool = true 
+        # sumOfTwo([1;2;3],[10;20;30;40],43);; 
+        : bool = true 
+        # sumOfTwo([1;2;3],[10;20;30;40],44);; 
+        : bool = false 
+        # sumOfTwo([1;2;3],[10;20;30;40],11);; 
+        : bool = true 
+        # sumOfTwo([1;2;3],[10;20;30;40],15);; 
+        : bool = false *)
+
+let rec sumOfTwo = function (a,b,v) ->
+  if a == [] || b == [] then false (* Base Case: Empty Lists *)
+    else
+        if List.hd a + List.hd b == v then true
+            else sumOfTwo(List.tl a, b, v) || sumOfTwo(a, List.tl b, v);;
+            (* Compare all of list a with b while also checkign all of list b with a *)
+            (* a = [1;2;3]          b = [1;2;3] 
+            Step 1: a head 1 + b head 1 = ...
+                Recursion:  a head 2 + b head 1 = ...
+                Recursion:  a head 3 + b head 1 = ...
+            ||
+            Step 2: a head 1 + b head 1 = ...
+                Recursion:  a head 1 + b head 2 = ...
+                Recursion:  a head 1 + b head 3 = ...
+            
+            At this point we have covered all of the possible values. When we do List.tl on
+            a list with 1 value we get [] which will return false
+            *)
+
+(* Problem Four: CYK Parsing Algorithm-Inspired Problem
+    Prototype: 
+        cyk_sublists n returns all of the positive integer pairs 
+        x and y that add up to n.  Pairs are returned as tuples.  Argument 
+        n must be larger than 1, otherwise return []
+    Signature: 
+        val cyk_sublists : int -> (int * int) list = <fun>
+    Sample Use:
+        # cyk_sublists 4;;
+        : (int * int) list = [(1, 3); (2, 2); (3, 1)] 
+        # cyk_sublists 3;; 
+        : (int * int) list = [(1, 2); (2, 1)] 
+        # cyk_sublists 5;; 
+        : (int * int) list = [(1, 4); (2, 3); (3, 2); (4, 1)]  
+        # cyk_sublists(6);; 
+        : (int * int) list = [(1, 5); (2, 4); (3, 3); (4, 2); (5, 1)] *)
+
+let rec cyk x y n list =
+  if       x > n        then list (* Ensure n>1 otherwise return list ( [] ) *)
+  else if  y > n        then cyk (x+1) 1 n list (*  *)
+  else if (x + y) == n  then cyk (x+1) 1 n (list @[(x,y)]) (* Add to tail *)
+  else                       cyk (x) (1+y) n list;;
+
+let cyk_sublists n =
+  cyk 1 1 n [];;
+
+(* This is a little difficult to visualize but easy to understand with a simple example
+
+    For the case where n = 3 we will start off with x, y, n = 1, 2, 3
+    The first step is to check if either x or y is greater than our value. Given that x and y currently are
+    not currently greater than sum to n we move on to the next y value. We keep increasing y until it's n-1. Then,
+    we reset y back to 1 and increase x. Using this method we will check every y value for every x.
+
+    For the case were x is greater than n we have an input n that is less than 1 so we output [].
+    For the case where y is greater than n we need to increase x and reset y back to 1, recursion.
+    For the case where x+y = n we just append (x;y) to our list at the end. 
+    Lastly, if x nor y are greater than or equal to n we step up y and try again. The only time the list
+    is modified is when x + y = n. Below is a simple example for n = 3.
+
+    x   y   n   list            Curr. Operation
+    1   1   3   []              else
+    1   2   3   [(1,2)]         x+y=n
+    2   1   3   [(1,2);(2,1)]   x+y=n   <-- For this operation we append (2,1) to the end
+    3   1   3   [(1,2);(2,1)]   x>n
+ *)
