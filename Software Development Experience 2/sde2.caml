@@ -1,3 +1,9 @@
+(*  ECE-3520 : Programming Systems
+    SDE2     : Spring 2022
+    ajbrune
+    C16480080
+ *)
+
 (* Problem 1: First Duplicate in a List
     Prototype: 
         first_duplicate of a list returns -10000 if there are no duplicates 
@@ -87,24 +93,18 @@ let rec first_nonrepeating inputList =
         # sumOfTwo([1;2;3],[10;20;30;40],15);; 
         : bool = false *)
 
-let rec sumOfTwo = function (a,b,v) ->
-  if a == [] || b == [] then false (* Base Case: Empty Lists *)
-    else
-        if List.hd a + List.hd b == v then true
-            else sumOfTwo(List.tl a, b, v) || sumOfTwo(a, List.tl b, v);;
-            (* Compare all of list a with b while also checkign all of list b with a *)
-            (* a = [1;2;3]          b = [1;2;3] 
-            Step 1: a head 1 + b head 1 = ...
-                Recursion:  a head 2 + b head 1 = ...
-                Recursion:  a head 3 + b head 1 = ...
-            ||
-            Step 2: a head 1 + b head 1 = ...
-                Recursion:  a head 1 + b head 2 = ...
-                Recursion:  a head 1 + b head 3 = ...
-            
-            At this point we have covered all of the possible values. When we do List.tl on
-            a list with 1 value we get [] which will return false
-            *)
+let rec sumOfTwo (a, b, v) = 
+    match (a, b) with
+    | ([], [])      -> false
+    | ([], _)       -> false (* Check base cases, a empty, b empty or both *)
+    | (_, [])       -> false
+    | (hd::tl, b)   -> if List.mem (v - hd) b then true 
+                       else sumOfTwo(tl, b, v);;
+    (* For there to be a sum of two numbers equal to v then there must exist a value b such that v - a = x 
+       Thus, we will split list a into head and tail as we have done before. Then, check to see if our desired
+       value x exists in our list b. If this value is not a member of b then we need to try the next value of a
+       hence recursion. Going back to the beginning but without the first value of a.
+    *)
 
 (* Problem Four: CYK Parsing Algorithm-Inspired Problem
     Prototype: 
