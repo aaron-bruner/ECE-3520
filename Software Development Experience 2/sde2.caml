@@ -92,19 +92,20 @@ let rec first_nonrepeating inputList =
         : bool = true 
         # sumOfTwo([1;2;3],[10;20;30;40],15);; 
         : bool = false *)
+let rec sothelper (x,b,v) =
+  match b with
+  | [] -> false
+  | (hd::tl) -> if x+hd==v then true
+      else sothelper (x,tl,v);; 
 
-let rec sumOfTwo (a, b, v) = 
-    match (a, b) with
-    | ([], [])      -> false
-    | ([], _)       -> false (* Check base cases, a empty, b empty or both *)
-    | (_, [])       -> false
-    | (hd::tl, b)   -> if List.mem (v - hd) b then true 
-                       else sumOfTwo(tl, b, v);;
-    (* For there to be a sum of two numbers equal to v then there must exist a value b such that v - a = x 
-       Thus, we will split list a into head and tail as we have done before. Then, check to see if our desired
-       value x exists in our list b. If this value is not a member of b then we need to try the next value of a
-       hence recursion. Going back to the beginning but without the first value of a.
-    *)
+let rec sumOfTwo (a,b,v) =
+  match (a,b) with
+  | ([],_) -> false (* Reference the note below *)
+  | (_,[]) -> false (* Edge testing for empty lists *)
+  | (hd::tl, b) -> if sothelper (hd,b,v) == true then true
+      else sumOfTwo(tl,b,v);;
+
+(* Note: I kept getting Exception: (Failure hd), this seemed to fix it: https://stackoverflow.com/questions/12487851/ocaml-error-failure-hd *)
 
 (* Problem Four: CYK Parsing Algorithm-Inspired Problem
     Prototype: 
