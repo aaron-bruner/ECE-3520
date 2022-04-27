@@ -56,18 +56,18 @@ let rec first_duplicate = function inputList ->
         # first_nonrepeating [1;1;1;2;2;2];; 
         : int = -10000 *)
 
-let rec reduceInput inputList tmpList =
+let rec fnrhelper inputList tmpList =
   match inputList with
   | []         -> -10000 (* Base Case: Empty input *)
   | hd::tl -> if ((List.mem hd tl) || (List.mem hd tmpList)) then
-                    reduceInput tl (tmpList @ [hd])
+                    fnrhelper tl (tmpList @ [hd])
                 else hd;;
 
 let rec first_nonrepeating inputList = 
   match inputList with
   | []         -> -10000
   | hd::tl -> if (List.mem hd tl) == false then hd (* Check if head repeats before recursion *)
-                else reduceInput inputList [];;
+                else fnrhelper inputList [];;
 
 (* Problem Three: The Sum of 2 Problem
     Prototype: 
